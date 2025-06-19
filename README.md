@@ -43,26 +43,6 @@ File yang digunakan berasal dari bagian train dalam dataset asli dan telah dinam
 
 ---
 
-## 🚀 Analysis Process
-Analisis dilakukan melalui beberapa langkah sistematis untuk memastikan kualitas data dan hasil yang akurat:
-
-#### a. Pembersihan dan Pra-pemrosesan Data
-Langkah awal adalah membersihkan data untuk memastikan konsistensi dan kualitas. Proses ini mencakup:
-* **Normalisasi Teks:** Mengubah semua teks menjadi huruf kecil dan menghapus spasi berlebih.
-* **Penanganan Data Kosong:** Memastikan tidak ada nilai kosong pada kolom krusial (`Job Title` dan `Cover Letter`).
-* **Deduplikasi Cerdas:** Menghapus baris yang merupakan duplikat berdasarkan **kombinasi `Job Title` dan `Cover Letter`**. Alasan penggunaan metode ini adalah untuk memastikan setiap data merupakan contoh unik dari sebuah surat lamaran untuk sebuah posisi spesifik, yang sangat penting untuk akurasi model klasifikasi.
-Setelah pembersihan, data yang tersisa sebanyak 759 baris unik yang siap digunakan untuk klasifikasi dan ringkasan.
-
-#### b. Klasifikasi Posisi Pekerjaan dengan AI
-* **Metode:** Menggunakan model `ibm-granite/granite-3.3-8b-instruct` melalui platform Replicate.
-* **Teknik:** *Prompt Engineering* canggih digunakan untuk memaksimalkan akurasi. *Prompt* dirancang untuk memberikan peran, tugas spesifik, daftar pilihan jawaban yang valid (diambil dari data unik `Job Title`), dan sebuah contoh (*few-shot learning*). Teknik ini mengarahkan model untuk memilih job title yang paling relevan, menghindari bias jawaban bebas, dan meningkatkan konsistensi klasifikasi.
-
-#### c. Ringkasan Terstruktur dengan AI
-* **Metode:** Memanfaatkan model yang sama (`ibm-granite/granite-3.3-8b-instruct`).
-* **Teknik:** *Prompt* dirancang untuk tidak hanya meringkas, tetapi juga **mengekstrak informasi kunci** dan menyajikannya dalam format terstruktur dengan judul: `Ringkasan Pengalaman`, `Skillset Utama`, dan `Posisi Relevan Sebelumnya`. Pendekatan ini mengubah data tidak terstruktur (teks bebas) menjadi data terstruktur yang mudah dicerna.
-
----
-
 ## 🔍 Insight & Findings
 Adapun beberapa hal yang berhasil ditemukan dalam project ini:
 
@@ -81,21 +61,6 @@ Terdapat 50+ job title berbeda dalam dataset, mulai dari Data Scientist, Senior 
 Beberapa surat lamaran tidak menyebutkan posisi sebelumnya atau tidak menyebutkan tools secara spesifik. Namun, model tetap mampu menyusun ringkasan yang masuk akal berdasarkan konteks umum, memperlihatkan bahwa model dapat mengisi celah informasi implisit meskipun tetap perlu kehati-hatian dalam interpretasinya.
 
 Beberapa insight ini membuktikan bahwa meskipun model AI bekerja dengan baik dalam kondisi ideal, kualitas input tetap menjadi penentu akurasi hasil. Oleh karena itu, penguatan pada tahap pre-processing dan desain prompt sangat krusial dalam sistem berbasis LLM seperti ini.
-
----
-
-## 🤝 Conclusion & Recommendations
-
-Proyek ini berhasil menunjukkan bahwa AI, khususnya model bahasa seperti IBM Granite, dapat diimplementasikan secara efektif untuk mentransformasi proses penyaringan surat lamaran. Dengan mengotomatiskan klasifikasi dan ringkasan, kita dapat menciptakan alur kerja rekrutmen yang lebih cepat, lebih konsisten, dan memberikan dasar pengambilan keputusan yang lebih obyektif serta terstandarisasi di tahap awal rekrutmen. Berdasarkan hasil di atas, berikut adalah rekomendasi yang konkret dan dapat ditindaklanjuti:
-
-###  **💡 Implementasi Sistem Pra-Filter Otomatis** 
-Rekomendasi utama adalah mengintegrasikan **model klasifikasi AI** ke dalam sistem pelacakan pelamar (Applicant Tracking System - ATS). Setiap surat lamaran yang masuk dapat secara otomatis diberi label `Job Title`, memungkinkan tim HR untuk langsung memfilter dan meninjau kandidat sesuai dengan lowongan yang relevan.
-
-###  **⏱️ Integrasi "AI Summary" pada Dasbor HR** 
-Tampilkan **ringkasan terstruktur** yang dihasilkan AI di samping setiap nama pelamar pada dasbor utama sistem HR. Hal ini akan memberikan *first-look* yang sangat cepat dan informatif kepada perekrut tanpa harus membuka dokumen asli terlebih dahulu, mempercepat keputusan untuk "melihat lebih lanjut" atau "melewatkan".
-
-###  **📈 Pengembangan Analisis Lanjutan** 
-Data terstruktur dari hasil ringkasan (khususnya `Skillset Utama`) dapat diagregasi untuk analisis tren. Perusahaan dapat memetakan skill apa yang paling sering muncul untuk posisi tertentu, membantu dalam perencanaan strategis tenaga kerja dan penyesuaian deskripsi pekerjaan di masa depan.
 
 ---
 
