@@ -6,7 +6,11 @@
 ## 📌 Project Overview
 
 ### Latar Belakang
-Di tengah pasar kerja yang kompetitif, tim Human Resources (HR) dihadapkan pada tantangan untuk menyaring ratusan hingga ribuan surat lamaran (cover letter) untuk setiap posisi yang dibuka. Proses manual ini tidak hanya memakan waktu dan tenaga, tetapi juga rentan terhadap bias dan inkonsistensi. Kecepatan dan ketepatan dalam mengidentifikasi kandidat yang paling relevan menjadi kunci untuk memenangkan talenta terbaik. Melalui model bahasa besar (LLM) IBM Granite, proyek ini memproses data riil dari cover letter dataset berisi 813 surat lamaran dari berbagai posisi pekerjaan di sektor teknologi dan data. 
+Di tengah pasar kerja yang kompetitif, tim Human Resources (HR) dihadapkan pada tantangan untuk menyaring ratusan hingga ribuan surat lamaran (cover letter) untuk setiap posisi yang dibuka.  Menurut data dari StandOut CV
+* **Rekruter hanya menghabiskan rata-rata 6–8 detik untuk memutuskan apakah sebuah CV layak dipertimbangkan**
+* **80% lamaran tidak lolos tahap penyaringan awal**
+  
+Proses ini tidak hanya memakan waktu dan tenaga, tetapi juga rentan terhadap bias dan inkonsistensi. Kecepatan dan ketepatan dalam mengidentifikasi kandidat yang paling relevan menjadi kunci untuk memenangkan talenta terbaik. Melalui model IBM Granite, proyek ini memproses data riil dari cover letter dataset berisi 813 surat lamaran dari berbagai posisi pekerjaan di sektor teknologi dan data. 
 
 ### Permasalahan
 Proses penyaringan surat lamaran secara manual seringkali menjadi hambatan (*bottleneck*) dalam alur rekrutmen, menyebabkan:
@@ -51,11 +55,11 @@ Ringkasan terstruktur yang dihasilkan oleh model AI terbukti sangat efektif dala
 
 ### 🧾 Pola Bahasa sebagai Indikator Posisi
 Model klasifikasi menunjukkan kemampuan tinggi dalam membedakan posisi pekerjaan berdasarkan nuansa bahasa dalam surat lamaran. Ditemukan bahwa:
-* Lamaran untuk posisi teknis seperti **'software engineer'** atau **'data scientist'** kaya akan terminologi spesifik (misalnya, *'REST API', 'microservices', 'machine learning', 'scikit-learn'*).
-* Lamaran untuk posisi manajerial seperti **'project manager'** lebih menonjolkan kata kerja yang berorientasi pada proses dan hasil (misalnya, *'mengelola', 'mengkoordinasikan', 'memimpin', 'mencapai target'*).
+* Lamaran untuk posisi teknis seperti **'software engineer'** atau **'data scientist'** kaya akan terminologi spesifik (misalnya, *'python', 'sql', 'machine learning'*).
+* Lamaran untuk posisi Analitis & Bisnis lebih menonjolkan kata kerja yang berorientasi pada dampak dan strategi (misalnya, *'analytics', 'business', 'strong', 'success'*).
 
-### 📊 Variasi Surat Lamaran Sangat Luas
-Terdapat 50+ job title berbeda dalam dataset, mulai dari Data Scientist, Senior Java Developer, hingga Quantitative Analyst. Adanya variasi tersebut menjadi tantangan tersendiri dalam membangun model klasifikasi multi-kelas.
+### 📊 Variasi Surat Lamaran 
+Terdapat 50+ job title berbeda dalam dataset, mulai dari Data Scientist, Senior Support Engineer, hingga Senior Software Engineer. Adanya variasi tersebut menjadi tantangan tersendiri dalam membangun model klasifikasi multi-kelas.
 
 ### 🔎 Informasi Tidak Selalu Eksplisit
 Beberapa surat lamaran tidak menyebutkan posisi sebelumnya atau tidak menyebutkan tools secara spesifik. Namun, model tetap mampu menyusun ringkasan yang masuk akal berdasarkan konteks umum, memperlihatkan bahwa model dapat mengisi celah informasi implisit meskipun tetap perlu kehati-hatian dalam interpretasinya.
@@ -68,10 +72,10 @@ Beberapa insight ini membuktikan bahwa meskipun model AI bekerja dengan baik dal
 
 #### Model IBM Granite 3.3 8B Instruct digunakan dalam dua tugas utama:
 
-**1 Multiclass Text Classification**
+**1. Multiclass Text Classification**
 Model **IBM Granite** dimanfaatkan sebagai *classifier zero-shot* yang canggih. Dengan merancang *prompt* yang memberikan konteks, pilihan jawaban, dan contoh, model mampu mengkategorikan surat lamaran ke dalam kelas `Job Title` yang spesifik dengan akurasi tinggi. Ini adalah penggunaan AI yang relevan untuk mengubah tugas manual yang repetitif menjadi proses otomatis.
 
-**2 Structured Summarization**
+**2. Structured Summarization**
 Ringkasan yang dihasilkan AI disusun dalam format tiga bagian utama: Ringkasan Pengalaman, Skillset Utama, dan Posisi Relevan Sebelumnya. Lebih dari sekadar meringkas, model **IBM Granite** digunakan untuk **ekstraksi informasi terstruktur**. *Prompt* yang dirancang secara spesifik menginstruksikan AI untuk bertindak seperti asisten HR, mengidentifikasi dan menyusun data-data penting (pengalaman, skill, jabatan) ke dalam format yang telah ditentukan. Ini adalah contoh penggunaan AI untuk mengubah data tidak terstruktur (teks bebas) menjadi wawasan terstruktur yang bernilai dan dapat ditindaklanjuti.
 
 Eksekusi via Langchain + Replicate API, serta dukungan pembersihan data menggunakan Python dan Pandas, sistem ini mencerminkan penerapan LLM yang efisien dan terukur untuk masalah dunia nyata dalam bidang HR-tech melalui kombinasi antara prompt engineering.
